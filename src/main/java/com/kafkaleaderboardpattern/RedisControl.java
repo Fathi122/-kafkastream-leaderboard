@@ -47,9 +47,7 @@ public class RedisControl implements Runnable{
                 while (iScores.hasNext()) {
                     Tuple score= iScores.next();
                     System.out.println(
-                            ANSI_BLUE + "Leaderboard - " + position + " : "
-                                    +  score.getElement() + " = " + score.getScore()
-                                    + ANSI_RESET);
+                            new StringBuilder().append(ANSI_BLUE).append("Leaderboard - ").append(position).append(" : ").append(score.getElement()).append(" = ").append(score.getScore()).append(ANSI_RESET).toString());
                     position++;
                 }
 

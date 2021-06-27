@@ -66,21 +66,11 @@ public class KafkaStreamLeaderBoardPattern {
                             stringSerde, stringSerde));
             // display Candidate score from consumed event on topic streaming.leaderboardpattern.input
             votingInput
-                    .peek(new ForeachAction<String, String>() {
-                        @Override
-                        public void apply(String candidate, String score) {
-                            System.out.println(new StringBuilder().append("Received Score : Candidate = ").append(candidate).append(", Score = ").append(score).toString());
-                        }
-                    });
+                    .peek((candidate, score) -> System.out.println(new StringBuilder().append("Received Score : Candidate = ").append(candidate).append(", Score = ").append(score).toString()));
 
             //Update the Redis key with the new voting score increment
             votingInput
-                    .foreach(new ForeachAction<String, String>() {
-                                 @Override
-                                 public void apply(String candidate, String score) {
-                                     redisUpdater.update_vote_score(candidate, Double.valueOf(score));
-                                 }
-                             }
+                    .foreach((candidate, score) -> redisUpdater.update_vote_score(candidate, Double.valueOf(score))
                     );
 
             /**************************************************

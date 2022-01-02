@@ -10,7 +10,7 @@
 ```
 ## Execute a shell in Kafka Container
 ```
- docker exec -it kafka-broker /bin/bash
+ docker exec -it kafka-broker bash
 ```
 ## Change directory to the Kafka Scripts
 ```
@@ -19,7 +19,7 @@
 ## Create a Topic with 1 partition and one replication factor
 ```
  ./kafka-topics.sh \
-   --zookeeper zookeeper:2181 \
+   --bootstrap-server localhost:9092 \
    --create \
    --topic streaming.leaderboardpattern.input \
    --partitions 1 \
@@ -28,6 +28,6 @@
 ## List Topics
 ```
  ./kafka-topics.sh \
-   --zookeeper zookeeper:2181 \
+   --bootstrap-server localhost:9092 \
    --list
 ```
